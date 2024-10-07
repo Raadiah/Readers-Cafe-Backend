@@ -8,6 +8,8 @@ app.use(cors());
 
 //import json data
 const books = require("./data/books.json")
+const featured = require("./data/featured.json")
+const faq = require("./data/faq.json")
 
 //APIs
 app.get('/', (req, res)=>{
@@ -22,6 +24,14 @@ app.get('/book/:id', (req, res)=>{
     const bookId = req.params.id;
     const book = books.find((book) => book.bookId == bookId);
     res.send(book);
+})
+
+app.get('/featured', (req, res)=>{
+    res.send(featured);
+})
+
+app.get('/faq', (req, res)=>{
+    res.send(faq);
 })
 
 app.listen(port, ()=>{
