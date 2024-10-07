@@ -10,7 +10,8 @@
       "category": "Fiction",
       "tags": ["Philosophical", "Fantasy", "Self-Discovery"],
       "publisher": "Canongate Books",
-      "yearOfPublishing": 2020
+      "yearOfPublishing": 2020,
+      "price": "200 USD"
     },
     {
       "bookId": 2,
@@ -23,7 +24,8 @@
       "category": "Memoir",
       "tags": ["Inspiring", "Political", "Biography"],
       "publisher": "Crown Publishing",
-      "yearOfPublishing": 2018
+      "yearOfPublishing": 2018,
+      "price": "300 USD"
     },
     {
       "bookId": 3,
@@ -36,7 +38,8 @@
       "category": "Biography",
       "tags": ["Memoir", "Education", "Family"],
       "publisher": "Random House",
-      "yearOfPublishing": 2018
+      "yearOfPublishing": 2018,
+      "price": "150 USD"
     },
     {
       "bookId": 4,
@@ -49,7 +52,8 @@
       "category": "Mystery",
       "tags": ["Nature", "Crime", "Romance"],
       "publisher": "G.P. Putnam's Sons",
-      "yearOfPublishing": 2018
+      "yearOfPublishing": 2018,
+      "price": "220 USD"
     },
     {
       "bookId": 5,
@@ -62,7 +66,8 @@
       "category": "Self-Help",
       "tags": ["Productivity", "Self-Improvement", "Behavior"],
       "publisher": "Penguin Random House",
-      "yearOfPublishing": 2018
+      "yearOfPublishing": 2018,
+      "price": "200 USD"
     },
     {
       "bookId": 6,
@@ -75,7 +80,8 @@
       "category": "History",
       "tags": ["Anthropology", "Evolution", "Civilization"],
       "publisher": "Harper",
-      "yearOfPublishing": 2014
+      "yearOfPublishing": 2014,
+      "price": "100 USD"
     },
     {
       "bookId": 7,
@@ -88,7 +94,8 @@
       "category": "Thriller",
       "tags": ["Suspense", "Psychological", "Mystery"],
       "publisher": "Celadon Books",
-      "yearOfPublishing": 2019
+      "yearOfPublishing": 2019,
+      "price": "800 USD"
     },
     {
       "bookId": 8,
@@ -101,7 +108,8 @@
       "category": "Science Fiction",
       "tags": ["Space", "Adventure", "Epic"],
       "publisher": "Chilton Books",
-      "yearOfPublishing": 1965
+      "yearOfPublishing": 1965,
+      "price": "50 USD"
     },
     {
       "bookId": 9,
@@ -114,6 +122,7 @@
       "category": "Fiction",
       "tags": ["Spiritual", "Adventure", "Philosophical"],
       "publisher": "HarperOne",
-      "yearOfPublishing": 1988
+      "yearOfPublishing": 1988,
+      "price": "900 USD"
     }
   ]
