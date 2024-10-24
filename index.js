@@ -25,7 +25,10 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     await client.connect();
-    const userCollection = client.db('readers-cafe-db').collection('users');
+    const database = client.db('readers-cafe-db');
+    const userCollection = database.collection('users');
+    const productCollection = database.collection('products');
+    const categoryCollection = database.collection('categories');
 
     //api requests
 
@@ -36,6 +39,13 @@ async function run() {
         res.send(result);
     })
 
+    app.get("/user/:id", async (req, res)=>{
+        const id = req.params.id;
+        const query = {uid: id}
+        const result = await userCollection.findOne(query);;
+        res.send(result);
+    })
+
     app.post("/user", async (req, res)=>{
         const user = req.body;
         const result = await userCollection.insertOne(user)
@@ -43,8 +53,44 @@ async function run() {
     })
 
     //categories
+    app.get("/categories", async (req, res)=>{
+        const query = categoryCollection.find();
+        const result = await query.toArray();
+        res.send(result);
+    })
+
+    app.post("/category", async (req, res)=>{
+        const category = req.body;
+        const result = await categoryCollection.insertOne(category)
+        res.send(result)
+    })
 
     //products
+    app.get("/products/:category?", async (req, res)=>{
+        const category = req.params.category;
+        const query = {
+            category: category
+        };
+
+        let result;
+
+        if(category) result = await productCollection.find(query).toArray();
+        else result = await productCollection.find().toArray();
+        res.send(result);
+    })
+
+    app.post("/product", async (req, res)=>{
+        const product = req.body;
+        const result = await productCollection.insertOne(product)
+        res.send(result)
+    })
+
+    app.get('/product/:id', async (req, res)=>{
+        const id = new ObjectId(req.params.id);
+        const query = {_id: id}
+        const book = await productCollection.findOne(query);
+        res.send(book);
+    })
 
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to Reader's Cafe Database!");
@@ -62,16 +108,6 @@ const faq = require("./data/faq.json")
 //APIs
 app.get('/', (req, res)=>{
     res.send("Readers' Cafe Server is running")
-})
-
-app.get('/books', (req, res)=>{
-    res.send(books);
-})
-
-app.get('/book/:id', (req, res)=>{
-    const bookId = req.params.id;
-    const book = books.find((book) => book.bookId == bookId);
-    res.send(book);
 })
 
 app.get('/featured', (req, res)=>{
