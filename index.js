@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -29,6 +29,8 @@ async function run() {
     const userCollection = database.collection('users');
     const productCollection = database.collection('products');
     const categoryCollection = database.collection('categories');
+    const orderCollection = database.collection('orders');
+    const wishlistCollection = database.collection('wishlist');
 
     //api requests
 
@@ -90,6 +92,27 @@ async function run() {
         const query = {_id: id}
         const book = await productCollection.findOne(query);
         res.send(book);
+    })
+
+    //order
+    app.get("/myOrder/:userId", async (req, res)=>{
+        const userId = req.params.userId;
+        const query = {user_uid: userId}
+        const result = await orderCollection.find(query).toArray();
+        res.send(result);
+    })
+
+    app.post("/order", async (req, res)=>{
+        const order = req.body;
+        const result = await orderCollection.insertOne(order)
+        res.send(result)
+    })
+
+    //wishlist
+    app.post("/wishlist", async (req, res)=>{
+        const wishlist = req.body;
+        const result = await wishlistCollection.insertOne(wishlist)
+        res.send(result)
     })
 
     await client.db("admin").command({ ping: 1 });
