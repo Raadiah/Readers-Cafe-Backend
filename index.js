@@ -48,9 +48,12 @@ async function run() {
         res.send(result);
     })
 
-    app.post("/user", async (req, res)=>{
-        const user = req.body;
-        const result = await userCollection.insertOne(user)
+    app.post("/user/:id", async (req, res)=>{
+        const id = req.params.id;
+        const query = {uid: id}
+        const user = { $set: req.body };
+        const options = { upsert: true }; 
+        const result = await userCollection.updateOne(query, user, options)
         res.send(result)
     })
 
@@ -95,7 +98,7 @@ async function run() {
     })
 
     //order
-    app.get("/myOrder/:userId", async (req, res)=>{
+    app.get("/myOrders/:userId", async (req, res)=>{
         const userId = req.params.userId;
         const query = {user_uid: userId}
         const result = await orderCollection.find(query).toArray();
