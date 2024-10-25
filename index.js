@@ -73,20 +73,33 @@ async function run() {
     //products
     app.get("/products/:category?", async (req, res)=>{
         const category = req.params.category;
-        const query = {
-            category: category
-        };
+        let query = {
+            available: true
+        }
 
-        let result;
+        if(category) {
+            query = {
+                ...query,
+                category: category
+            }
+        }
 
-        if(category) result = await productCollection.find(query).toArray();
-        else result = await productCollection.find().toArray();
+        const result = await productCollection.find(query).toArray();
         res.send(result);
     })
 
     app.post("/product", async (req, res)=>{
         const product = req.body;
         const result = await productCollection.insertOne(product)
+        res.send(result)
+    })
+
+    app.put("/product/:id", async (req, res)=>{
+        const id = new ObjectId(req.params.id)
+        const product = { $set: req.body }
+        const query = {_id: id}
+        const result = await productCollection.updateOne(query, product)
+        console.log(result)
         res.send(result)
     })
 
@@ -127,7 +140,6 @@ async function run() {
 run().catch(console.dir);
 
 //import json data
-const books = require("./data/books.json")
 const featured = require("./data/featured.json")
 const faq = require("./data/faq.json")
 
