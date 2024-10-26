@@ -11,7 +11,7 @@ app.use(express.json());
 
 //mongodb connect
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@cluster0.uqio6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = process.env.MONGODB_URI;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -24,7 +24,7 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    await client.connect();
+    //await client.connect();
     const database = client.db('readers-cafe-db');
     const userCollection = database.collection('users');
     const productCollection = database.collection('products');
@@ -131,8 +131,8 @@ async function run() {
         res.send(result)
     })
 
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to Reader's Cafe Database!");
+    //await client.db("admin").command({ ping: 1 });
+    //console.log("Pinged your deployment. You successfully connected to Reader's Cafe Database!");
   } finally {
   }
 }
